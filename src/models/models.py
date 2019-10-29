@@ -1,7 +1,6 @@
 """
 Library of simple model classes that are often used
 in text understanding
-
 author: Antoine Bosselut (atcbosselut)
 """
 
@@ -54,19 +53,15 @@ class WeightedBOW(PretrainedEmbeddingsModel):
     Indexes a set of word embeddings for a sequence of words it receives
     as input. Weighs each of these embeddings by a learned mask
     and returns the sum
-
     Initialization Args:
         opt.vSize: number of embeddings to initialize
         opt.hSize: size of embeddings to initialize
         opt.dpt: dropout probability after the embedding layer (default = 0)
         max_size: maximum number of masking functions
-
     Input:
         input: 3-dimensional tensor of size batch_size x seq_len
-
     Output:
         2-dimensional tensor of size batch_size x embed_size
-
     """
     def __init__(self, opt, max_size):
         super(WeightedBOW, self).__init__()
@@ -105,19 +100,15 @@ class PaddedRNN(nn.Module):
     Indexes a set of word embeddings for a sequence of words it receives
     as input. Weighs each of these embeddings by a learned mask
     and returns the sum
-
     Initialization Args:
         opt.hSize: size of hidden state of GRU
         opt.nL: number of GRU layers
         opt.dpt: dropout probability between GRU layers (default = 0)
         opt.bid: use bidirectional GRU
-
     Input:
         input: 3-dimensional tensor of size batch_size x seq_len
-
     Output:
         2-dimensional tensor of size batch_size x embed_size
-
     """
     def __init__(self, opt):
         super(PaddedRNN, self).__init__()
@@ -192,7 +183,6 @@ class PaddedRNN(nn.Module):
 class BilinearAttention(nn.Module):
     """
     Compute a bilinear attention between two vectors
-
     Initialization Args:
         act: which non-linearity to use to compute attention
             (sigmoid for independent attention,
@@ -202,17 +192,14 @@ class BilinearAttention(nn.Module):
         output_size: number of probabilities to compute
         bias: bias the bilinear projection
         temperature: temperature parameter for attention
-
     Input:
         input: 3-dimensional tensor of size
                 batch_size x seq_len x hidden_state
                 These are the hidden states to compare to
         hidden: vector used to compute attentions
-
     Output:
         attention distribution over hidden states
         activations for each hidden state
-
     """
     def __init__(self, input_size_1, input_size_2, output_size,
                  bias=True, temperature=1, act="softmax"):
@@ -245,7 +232,6 @@ class BilinearAttention(nn.Module):
 class Attender(nn.Module):
     """
     Attend to a set of vectors using an attention distribution
-
     Input:
         input: 3-dimensional tensor of size
                 batch_size x seq_len x hidden_state
@@ -254,11 +240,9 @@ class Attender(nn.Module):
         do_reduce: indicator variable indicating whether we compute
                    the weighted average of the attended vectors OR
                    just return them scaled by their attention weight
-
     Output:
         attention distribution over hidden states
         activations for each hidden state
-
     """
     def __init__(self):
         super(Attender, self).__init__()
@@ -277,16 +261,13 @@ class Attender(nn.Module):
 class PaddedEncoder(PretrainedEmbeddingsModel):
     """
     Encode a sentence using a recurrent neural network
-
     Input:
         input: 2-dimensional tensor of size
                 batch_size x max_seq_len
         length_tensor: lengths of the sequences in the batch
-
     Output:
         state -- final hidden state of each sequence
         outs -- outputs of encoder at each step
-
     """
     def __init__(self, opt):
         super(PaddedEncoder, self).__init__()

@@ -390,7 +390,7 @@ class NPN(nn.Module):
                    (useful for positional mask in REN paper)
         q_max_words: maximum number of words in questions
                     (useful for positional mask in REN paper)
-        opt: options for all model components
+        opt: options for all models components
         opt.ent: number of entities to initialize
         opt.eSize: size of entity embeddings to initialize
 
