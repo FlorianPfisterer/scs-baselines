@@ -1,5 +1,6 @@
 torch==0.4
 torchvision
+torchtext
 pandas
 nltk
 progressbar
